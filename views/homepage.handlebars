@@ -1,0 +1,38 @@
+<section class="container">
+  <h1>Welcome to My Blog</h1>
+  {{#if loggedIn}}
+  <a href="/logout" class="btn">Logout</a>
+  <a href="/dashboard" class="btn">Dashboard</a>
+  <a href="/create" class="btn">Create New Post</a>
+  {{else}}
+  <a href="/login" class="btn">Login</a>
+  <a href="/signup" class="btn">Signup</a>
+  {{/if}}
+</section>
+
+{{#if loggedIn}}
+<section class="container">
+  {{#if blogPosts.length}}
+    {{#each blogPosts as |post|}}
+      <article class="blog-post">
+        <h2>{{post.title}}</h2>
+        <p>Posted by: {{post.author}} on {{format_date post.createdAt}}</p>
+        <p>{{post.body}}</p>
+        <a href="/post/{{post.id}}">Read More</a>
+      </article>
+    {{/each}}
+  {{else}}
+    <p>No blog posts available.</p>
+  {{/if}}
+</section>
+{{else}}
+<section class="container">
+  <p>Please log in to view blog posts and create your own content.</p>
+</section>
+{{/if}}
+
+{{#if loggedIn}}
+<script src="./js/blog.js"></script>
+{{else}}
+<script src="./js/login.js"></script>
+{{/if}}
